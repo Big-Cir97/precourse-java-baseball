@@ -12,14 +12,15 @@ public class Judge {
         judgeResult.clear();
     }
 
-    public JudgeResult inProgress(List<Ball> computerBaseBall, List<Ball> playerBaseBall) {
+    //List<Ball> computerBaseBall, List<Ball> playerBaseBall
+    public JudgeResult inProgress(ComputerBaseBall computerBaseBall, PlayerBaseBall playerBaseBall) {
         init();
 
         for (int i = START_ROUND - 1; i < END_ROUND; i++) {
-            Ball computer = computerBaseBall.get(i);
-            Ball player = playerBaseBall.get(i);
+            Ball computer = computerBaseBall.toBall(i);
+            Ball player = playerBaseBall.toBall(i);
 
-            judging(playerBaseBall, computer, player);
+            judging(playerBaseBall.getBalls(), computer, player);
         }
 
         return judgeResult;

@@ -17,7 +17,8 @@ class PlayerBaseBallTest {
     @DisplayName("사용자 입력으로 PlayerBaseBall을 생성한다.")
     void createPlayerBaseBall() {
         String inputNumbers = "123";
-        PlayerBaseBall playerBaseBall = new PlayerBaseBall(inputNumbers);
+        PlayerBaseBall playerBaseBall = new PlayerBaseBall();
+        playerBaseBall.update(inputNumbers);
 
         assertThat(playerBaseBall.getBalls().size()).isEqualTo(inputNumbers.length());
     }
@@ -26,7 +27,8 @@ class PlayerBaseBallTest {
     @DisplayName("getBalls() 로 얻은 List는 수정이 불가능하다.")
     void getImmutableList() {
         String inputNumbers = "123";
-        PlayerBaseBall playerBaseBall = new PlayerBaseBall(inputNumbers);
+        PlayerBaseBall playerBaseBall = new PlayerBaseBall();
+        playerBaseBall.update(inputNumbers);
         List<Ball> immutableList = playerBaseBall.getBalls();
         Ball ball = new Ball("1");
 

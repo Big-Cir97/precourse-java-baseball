@@ -1,5 +1,7 @@
 package baseball;
 
+import java.util.Objects;
+
 public class Ball {
     private int number;
 
@@ -12,6 +14,11 @@ public class Ball {
         if (!Character.isDigit(number.charAt(0))) {
             throw new IllegalArgumentException("숫자가 아니면 Ball을 생성할 수 없습니다.");
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 
     @Override

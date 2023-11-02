@@ -16,19 +16,20 @@ public class PlayGame {
 
     public void startGame() {
         outputView.printStartGameMessage();
-        playGame();
+        ComputerBaseBall computerBaseBall = initComputer();
+        PlayerBaseBall playerBaseBall = initPlayer();
+        playGame(computerBaseBall, playerBaseBall);
+        // playGame(initComputer(), initPlayer());
     }
 
-    private void playGame() {
-        ComputerBaseBall computerBaseBall = initComputer();
-        PlayerBaseBall playerBaseBall;
+    private void playGame(ComputerBaseBall computerBaseBall, PlayerBaseBall playerBaseBall) {
+        computerBaseBall.reset();
         judge.init();
 
         while (!judge.isSuccessed()) {
             outputView.printInputMessage();
-
-            playerBaseBall = initPlayer(inputView.inputNumbers());
-            JudgeResult jugeResult = judge.inProgress(computerBaseBall.getBalls(), playerBaseBall.getBalls());
+            playerBaseBall.update(inputView.inputNumbers());
+            JudgeResult jugeResult = judge.inProgress(computerBaseBall, playerBaseBall);
 
             outputView.printGameResult(jugeResult);
         }
@@ -38,7 +39,7 @@ public class PlayGame {
 
     private void restartGame(String inputNumber) {
         if (inputNumber.equals(INPUT_RESTART_NUMBER)) {
-            playGame();
+            playGame(initComputer(), initPlayer());
         }
     }
 
@@ -46,7 +47,7 @@ public class PlayGame {
         return new ComputerBaseBall();
     }
 
-    private PlayerBaseBall initPlayer(String inputNumbers) {
-        return new PlayerBaseBall(inputNumbers);
+    private PlayerBaseBall initPlayer() {
+        return new PlayerBaseBall();
     }
 }
